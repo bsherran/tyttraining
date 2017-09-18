@@ -1,0 +1,263 @@
+<?php
+
+class AprendizModel implements IModel {
+
+//propiedades 
+    private $table = "aprendiz";
+    private $entity = "Aprendiz";
+    private $conexion = null;
+
+    public function __construct() {
+        $this->conexion = SPDO::singleton();
+    }
+
+//Metodos
+
+    public function insert($entity) {
+        $entity instanceof Categoria;
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "insert into {$this->table} values(null,?,?)";
+            $query = $this->conexion->prepare($sql);
+
+            @$query->bindParam(1, $entity->getCategoria());
+            @$query->bindParam(2, $entity->getDescripcion());
+            $query->execute();
+            $entity->setIdCategoria($this->conexion->lastInsertId());
+            $retorno->data = $entity;
+            $retorno->status = 200;
+            $retorno->msg = "<i class='fa fa-check-circle'></i> Registro exitoso.";
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function delete($entity) {
+        $entity instanceof Categoria;
+
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "DELETE FROM {$this->table} where idCategoria = ?";
+            $query = $this->conexion->prepare($sql);
+            @$query->bindParam(1, $entity->getIdCategoria());
+            $query->execute();
+            $retorno->data = $entity;
+
+            $retorno->status = 200;
+            $retorno->msg = "<i class='fa fa-check-circle'></i> Registro Eliminado.";
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function update($entity) {
+        $entity instanceof Categoria;
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "update {$this->table} set categoria = ?, descripcion = ? where idCategoria = ?";
+            $query = $this->conexion->prepare($sql);
+
+            @$query->bindParam(1, $entity->getCategoria());
+            @$query->bindParam(2, $entity->getDescripcion());
+            @$query->bindParam(3, $entity->getIdCategoria());
+            $query->execute();
+            $entity->setIdCategoria($this->conexion->lastInsertId());
+            $retorno->data = $entity;
+            $retorno->status = 200;
+            $retorno->msg = "<i class='fa fa-check-circle'></i> Actualizado correctamente.";
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function consultarIdentificacion($entity) {
+        $entity instanceof Aprendiz;
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "select * from aprendiz as a natural join usuario as u natural join persona as p where p.perIdentificacion = ?";
+            $query = $this->conexion->prepare($sql);
+            @$query->bindParam(1, $entity->getPerIdentificacion());
+            $query->execute();
+            $retorno->data = $query->fetchObject($this->entity);
+
+            $retorno->status = 200;
+            $retorno->msg = "<i class='fa fa-check-circle'></i> El aprendiz fue encontrado";
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function getById($entity) {
+        $entity instanceof Categoria;
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "select idCategoria,categoria,descripcion from {$this->table} where idCategoria = ?";
+            $query = $this->conexion->prepare($sql);
+            @$query->bindParam(1, $entity->getIdCategoria());
+            $query->execute();
+            $retorno->data = $query->fetchObject($this->entity);
+            $retorno->status = 200;
+            $retorno->msg = "Consulta exitosa.";
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function getByKeywordApr($strquery = null) {
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            extract($_REQUEST);
+            $condition = ' true ';
+            if ($strquery !== null) {
+                if (trim($strquery) && strlen($strquery) > 2) {
+                    $condition .= "and (p.perIdentificacion like '%{$strquery}%' || p.perNombre like '%{$strquery}%')";
+                }
+            }
+            $sql = "select * from aprendiz as a natural join usuario as u natural join persona as p where {$condition} limit 10";
+            $query = $this->conexion->prepare($sql);
+            $query->execute();
+            $retorno->data = $query->fetchAll(PDO::FETCH_CLASS, $this->entity);
+            if (count($retorno->data) == 0) {
+                $retorno->status = 201;
+                $retorno->msg = "No hay resultados para:" . $strquery;
+            }
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function get($entity) {
+        $entity instanceof Categoria;
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "select idCategoria,categoria,descripcion from {$this->table} order by idCategoria desc";
+            $query = $this->conexion->prepare($sql);
+            $query->execute();
+            $retorno->data = $query->fetchAll(PDO::FETCH_CLASS, $this->entity);
+            $retorno->status = 200;
+            $retorno->msg = "Consulta exitosa.";
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function validarDuplicado($entity) {
+        $entity instanceof Categoria;
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "select categoria from {$this->table} WHERE categoria = ?";
+            $query = $this->conexion->prepare($sql);
+            @$query->bindParam(1, $entity->getCategoria());
+            $query->execute();
+            $retorno->data = $query->fetchObject($this->entity);
+            if ($retorno->data instanceof $this->entity) {
+                $retorno->status = 200;
+                $retorno->msg = "<i class='fa fa-warning'></i> La categoria ya existe!";
+            }
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+    public function authUser($usuario) {
+
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+            $sql = "select * "
+                    . "from aprendiz a inner join usuario u "
+                    . "on a.usuId = u.usuId "
+                    . "inner join persona p "
+                    . "on u.perId = p.perId "
+                    . "where usuLogin=? and usuPassword=?";
+            $query = $this->conexion->prepare($sql);
+            @$query->bindParam(1, $usuario->getUsuLogin());
+            @$query->bindParam(2, $usuario->getUsuPassword());
+            $query->execute();
+            $retorno->data = $query->fetchObject($this->entity);
+            if ($retorno->data instanceof $this->entity) {
+                $retorno->status = 200;
+                $retorno->msg = "Consulta exitosa.";
+            } else {
+                $retorno->status = 501;
+                $retorno->msg = "Usuario no encontrado.";
+            }
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+    public function getByKeyword($strquery = null) {
+        $retorno = new stdClass();
+        $retorno->data = null;
+        $retorno->status = 0;
+        $retorno->msg = "";
+        try {
+
+            $condition = ' true ';
+            if ($strquery !== null) {
+                if (trim($strquery["keyword"]) && strlen($strquery["keyword"]) > 2) {
+                    $condition .= "and (p.perIdentificacion like '%{$strquery["keyword"]}%' or p.perNombre like '%{$strquery["keyword"]}%' )";
+                }
+            }
+            $sql = "select * from aprendiz as a natural join usuario as u natural join persona as p where {$condition} limit 5";
+            $query = $this->conexion->prepare($sql);
+            $query->execute();
+            $retorno->data = $query->fetchAll(PDO::FETCH_CLASS, $this->entity);
+            if (count($retorno->data) == 0) {
+                $retorno->status = 201;
+                $retorno->msg = "No hay resultados para:" . $strquery['keyword'];
+            }
+        } catch (PDOExeption $e) {
+            $retorno->status = 500;
+            $retorno->msg = $e->message;
+        }
+        return $retorno;
+    }
+
+}
+
+?>

@@ -1,0 +1,322 @@
+body{
+    background-image: url(../assets/textura.png);
+}
+
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot');
+    src: url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+        url('../fonts/fontawesome-webfont.woff') format('woff'),
+        url('../fonts/fontawesome-webfont.ttf') format('truetype');     
+    font-weight: normal;
+    font-style: normal;
+}
+.thumbnail.imgRoundEquipo {
+    text-align: center;
+    margin-left: 150px;
+}
+img.imgEquipoDesarrollador {
+    display: inline-block;
+    margin: 1em;    
+    border-radius: 100%;
+}
+.iconoFlechaCarrousel {
+    font-size: 3.1em;
+    position: relative;
+    top: 1.9em;
+}
+#alertConsulta{
+    display: none;
+}
+#footer-container{
+    background-color: #01908c;
+    height: 90px;
+    /*   display: flex;*/
+    align-items: center;
+    color: #ffffff;
+    justify-content: center;
+    /*   position: absolute;*/
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+main{
+    position: relative;
+    border: 1px solid rgba(121, 125, 127, 0.16);
+    width: 1140px;
+    min-height: 300px;
+    margin: 20px auto;
+    background-color: #ffffff;
+
+}
+.carousel-inner .item img{
+    border-radius: 10px;
+}
+header#hprincipal{
+    font-family: "Aarvark Cafe" !important;
+    position: relative;
+    width: 100%;
+    height: 227px;
+    *border-bottom: 1px solid #000;
+    background-image: url(../assets/enca.png);
+    background-color:#fff;  
+}
+header#hprincipal h1 {
+    position: absolute;
+    left: 260px;
+    top: 29px;
+    color: #01908c;
+    font-size: 73px;
+}
+body {
+    background-color: #2c3338;
+    color: #606468;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5em;
+}
+
+a {
+    color: #01908c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input {
+    border: none;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5em;
+    padding: 0;
+    *-webkit-appearance: none;
+}
+
+p {
+    line-height: 1.5em;
+}
+
+#login form span {
+    background-color: #363b41;
+    border-radius: 3px 0px 0px 3px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    -webkit-border-radius: 3px 0px 0px 3px;
+    color: #606468;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+}
+
+#login form input {
+    height: 50px;
+}
+
+#login form input[type="submit"] {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #ea4c88;
+    color: #eee;
+    font-weight: bold;
+    margin-bottom: 2em;
+    text-transform: uppercase;
+    width: 280px;
+}
+
+#login form input[type="submit"]:hover {
+    background-color: #d44179;
+}
+
+#login > p {
+    text-align: center;
+}
+.bglogin{    
+    margin-left: 190px;
+}
+#logologin{
+    margin-left: 90px;
+}
+.boton{
+    background-color: #ff8c00;
+    border: 0px;
+    width: 100px;
+    height: 41px;
+    margin-left: 91px;
+}
+.botonListas{
+    background-color: #969a9a;
+    border: 0px;
+    width: 132px;
+    height: 33px;
+    margin-left: 292px;
+    border-radius: 11px;
+}
+.formListas{
+    margin-left: 10px;
+    font-size: 17px;
+}
+.botonNivel{
+    background-color: #969a9a;
+    border: 0px;
+    width: 166px;
+    height: 33px;
+    margin-left: 60px;
+    border-radius: 11px;
+    position: static;
+}
+.botonLeccion{
+    background-color: #969a9a;
+    border: 0px;
+    width: 155px;
+    height: 33px;
+    margin-left: 9px;
+    border-radius: 11px;
+    position: static;
+}
+.logo{
+    width: 285px;
+    /* height: 150px; */
+    margin-left: 30px;
+    margin-top: 35px;
+}
+
+.ocultos{
+    display: none;
+}
+#label-pre{
+    width: 90%;
+    float: right;
+    margin-right: -140px;
+    margin-top: -4px;
+
+}
+#select-pre{
+    width: 91%;
+    float: right;
+    margin-right: -142px;
+    margin-top: -7px;
+}
+.input-lab{
+    width: 122%;
+    float: right;
+    margin-right: -130px;
+    margin-top: -7px;
+    /* margin-left: -45px; */
+}
+.input-ima{
+    width: 122%;
+    float: right;
+    margin-right: -130px;
+    margin-top: -7px;
+    /* margin-left: -45px; */
+}
+.registrar{
+    margin-left: 50px
+}
+.reg{
+    margin-left: 224px;
+}
+#contenedor-opciones table{
+    position: relative;
+    width: 450px;
+}
+
+#contenedor-opciones label,
+#contenedor-opciones input{
+    display: inline-block !important;
+}
+
+#contenedor-opciones input[type=radio],
+#contenedor-opciones input[type=checkbox]{
+    width: 30px !important;
+}
+.img-perfil{
+    /*    class="img-circle";*/
+    /*    alt="Cinque Terre"*/
+    width: 200px;
+    height: 191px;
+    margin-left: 463px;
+    border: 2px solid #000000;
+    border-radius: 1000px;
+}
+.icono-camera{  
+    margin-left: 623px;
+    margin-top: -55px;
+    position: absolute;
+    width: 55px;
+}
+/*.imagen-foto-per input[type=file]{
+    display: none;
+}*/
+figcaption{
+    padding: 10px 0;
+    text-align: center;
+}
+.nombre{
+    text-align: center;
+    font-size: 40px;
+    color: #01908c;  
+    font-family: "Aarvark Cafe" !important;
+}
+.tamaño-cajas{
+    width: 575px;
+}
+.caja-texto{
+    width: 600px;
+}
+.btn-ac{
+    margin-left: 225px;
+}
+.img-registro{
+    width: 165px;
+    height: 166px;
+    margin-left: 180px;
+    border: 2px solid #000000;
+    border-radius: 1000px;
+}
+.icono-camera-reg{  
+    margin-left: 130px;
+    margin-top: -55px;
+    position: absolute;
+    width: 55px;
+}
+.formularioRegistro{
+    width: 76%;
+}
+.tabla{
+    width: 95%;
+    margin-left: -13px;
+    text-align: center;
+}
+.form-inline.cajas{
+    width: 590px
+}
+.panel panel-primary aprendiz{
+    width: 600px;
+}
+h4{
+    padding: 7px;
+    
+}
+h2{
+    color: #01908c;
+}
+b{
+    color: #ff8c56;
+}
+.caja-texto-reportes{
+        width: 799px;
+}
+.tablaAprendiz{
+    width: 650px;
+}
+.dropdown in{
+    color: white;
+    background: white;
+}
