@@ -27,14 +27,19 @@
                     <a href="?c=Area&a=listar">Gestionar Pruebas</a>
                 </li>    
                 <li class="dropdown">
-                     <li><a href="?c=Informes&a=listar">Reportes</a></li>
-                    <ul class="dropdown-menu">
-                       
-<!--                        <li><a href="?a=RegistrarAdmin">Estadisticas</a></li>                        -->
-                    </ul>
+                <li><a href="?c=Informes&a=listar">Reportes</a></li>
+                <ul class="dropdown-menu">
+
+                    <!--                        <li><a href="?a=RegistrarAdmin">Estadisticas</a></li>                        -->
+                </ul>
                 </li>
                 <li class="dropdown">
-                        <li><a href="?a=RegistrarSupAdmin">Registrar</a></li>
+                <li>
+                    <a href="?a=RegistrarSupAdmin">Registrar</a>
+                </li>
+                <li>
+                    <a href="?a=ImportarArchivos">Importar Archivos</a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

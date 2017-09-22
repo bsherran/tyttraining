@@ -49,6 +49,10 @@ class IndexController implements IController {
         $pathview = $this->subviewpath . "RegistrarSupAdmin.php";
         $this->view->show($pathview);
     }
+    public function ImportarArchivos() {
+        $pathview = $this->subviewpath . "ImportarArchivos.php";
+        $this->view->show($pathview);
+    }
     public function RegistrarAdmin() {
         $pathview = $this->subviewpath . "RegistrarAdmin.php";
         $this->view->show($pathview);

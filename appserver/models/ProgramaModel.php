@@ -73,7 +73,14 @@ class ProgramaModel {
                     $condition .= "and (p.proNombre like '%{$keyword}%')";
                 }
             }
-            $sql = "select * from programa p where {$condition} limit 5";
+            //count de ficha con inner join a programa //suma las fichas que estan en un programa
+            //$sql = "select *, COUNT(ficId) as total from ficha f INNER JOIN programa p ON f.proId=p.proId WHERE {$condition} GROUP BY f.proId limit 5";
+            //count de ficha_aprendiz con iner join a programa //suma los aprendices que estan en una ficha
+            //SELECT *, COUNT(aprId) AS total from ficha_aprendiz f GROUP BY ficId
+            //consulra gustavo donde suma todos los aprendices de un solo programa
+            //$sql="SELECT count(fa.aprId) as cantidad FROM ficha_aprendiz as fa natural join ficha as f natural join programa as p where p.proId = 2";
+            //$sql="SELECT fi.ficId,p.proNombre, COUNT(fi.ficId) as total1 from ficha fi INNER JOIN programa p ON fi.proId=p.proId WHERE {$condition} GROUP BY fi.proId UNION SELECT f.ficId,f.aprId, COUNT(f.aprId) AS total1 from ficha_aprendiz f WHERE {$condition} GROUP BY f.ficId";
+            $sql="SELECT proNombre,proId, count(fa.aprId) as cantidad FROM ficha_aprendiz as fa natural join ficha as f natural join programa as p WHERE {$condition} GROUP BY proId";
             $query = $this->conexion->prepare($sql);
             $query->execute();
             $retorno->data = $query->fetchAll(PDO::FETCH_CLASS, $this->entity);

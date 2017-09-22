@@ -1,8 +1,8 @@
 $(function () {
     obtenerProgramas("");
-    $('#txtBuscarPrograma').keyup(function () {
+    $('#txtBuscarPrograma').change(function () {
         var keyword = $(this).val();
-        obtenerProgramas(keyword);
+        obtenerProgramas(keyword);        
     });
 });
 
@@ -12,22 +12,30 @@ function obtenerProgramas(keyword) {
         data: 'keyword=' + keyword,
         method: 'post',
         dataType: 'json',
-        success: function (data) {
-            var html = "";
-            for (var i = 0; i < data.data.length; i++) {
-                var programa = data.data[i];
-                html += "<tr>";
-//                html += "<td>" + programa.proId + "</td>";                
-                html += "<td>" + programa.proNombre + "</td>";
-//                html += "<td class='text-center'><a href='?c=Ficha&a=delete&ficCodigo="+programa.ficId+"'><i class='fa fa-pencil-square'></i></a></td>";
-//                html += "<td class='text-center'><a href='?c=Ficha&a=delete&ficCodigo="+programa.ficCodigo +"'><i class='fa fa-trash'></i></a></td>";
+        success: function (r) {
+            
+            if(r.data.length > 0){
+                var html = "";
+            for (var i = 0; i < r.data.length; i++) {
+                var programa = r.data[i];
+                //console.log(programa)
+                html += "<tr>";              
+                html += "<td>" + programa.proNombre + "</td>";                
+                html += "<td>" + programa.cantidad + "</td>";                
+                //html += "<td>" + "+" + "</td>";                
+                //html += "<td>" + programa.proId + "</td>";                
                 html += "</tr>";
+                $('#tblPrograma').find('tbody').html(html);
             }
-            $('#tblPrograma').find('tbody').html(html);
+        }else{
+            alert("No hay datos");
+                $("#tblFicha").find("tbody").html("");
+        }
+            
         }, error: function (e, err) {
-            alert("err");
+            alert("error");
+           $("#tblFicha").find("tbody").html("");
         }
     });
 }
-
 

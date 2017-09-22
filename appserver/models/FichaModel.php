@@ -64,7 +64,7 @@ class FichaModel {
         return $retorno;
     }
 
-    public function getByKeyword($strquery = null) {
+    public function getByKeyword($keyword = null) {
         $retorno = new stdClass();
         $retorno->data = null;
         $retorno->status = 0;
@@ -73,9 +73,9 @@ class FichaModel {
             extract($_REQUEST);
 
             $condition = ' true ';
-            if ($strquery !== null) {
+            if ($keyword !== null) {
                 if (trim($keyword) && strlen($keyword) > 2) {
-                    $condition .= "and (f.ficCodigo like '%{$keyword}%' || p.proNombre like '%{$keyword}%' || p.ficFechaInicio like '%{$keyword}%' || p.ficFechaFin like '%{$keyword}%')";
+                    $condition .= " and (f.ficCodigo like '%{$keyword}%' || p.proNombre like '%{$keyword}%' || f.ficFechaInicio like '%{$keyword}%' || f.ficFechaFin like '%{$keyword}%')";
                 }
             }
             $sql = "select * from ficha as f natural join programa as p where {$condition} limit 5";
