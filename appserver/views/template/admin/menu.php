@@ -31,12 +31,14 @@
                 <ul class="dropdown-menu">
 
                     <!--                        <li><a href="?a=RegistrarAdmin">Estadisticas</a></li>                        -->
-                </ul>
-                </li>
+                </ul>                                        
                 <li class="dropdown">
-                <li>
-                    <a href="?a=RegistrarSupAdmin">Registrar</a>
-                </li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registrar <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="?a=RegistrarSupAdmin">Super Administrador</a></li>
+                        <li><a href="?a=RegistrarAdmin">Administrador</a></li>                        
+                    </ul>
+                </li> 
                 <li>
                     <a href="?a=ImportarArchivos">Importar Archivos</a>
                 </li>

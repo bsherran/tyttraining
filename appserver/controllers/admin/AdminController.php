@@ -40,5 +40,17 @@ class AdminController {
             $this->view->show("admin/registrarSupAdmin.php", $vars);
         }
     }
+    
+    public function registrarSupAdmin() {
+        extract($_REQUEST);
+        $entity = new SuperAdministrador();
+        $entity->setPerNombre();
+        $entity->setPerApellido();
+        $entity->uploadFile($_FILES["areImagen"]);
+        $model = new SuperAdministradorModel();
+        $r = $model->insert($entity);
+        $pathview = $this->subviewpath . "gestionar/gestionarAreaRegistrar.php";
+        header("location:?c=Area&a=listar");
+    }
 
 }

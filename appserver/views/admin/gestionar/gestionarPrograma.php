@@ -35,9 +35,9 @@ $config = Config::singleton();
                                         <tr>
                                             <!--<th>Id</th>-->
                                             <th>Nombre</th>
-                                            <!--<th>N° Fichas</th>-->
+                                            <th>N° Fichas</th>
                                             <th>N° Aprendices</th>
-                                            <th>Mas</th>
+                                            <th colspan="1" class="text-center">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>

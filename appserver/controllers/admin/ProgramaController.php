@@ -23,6 +23,12 @@ class ProgramaController implements IController {
         $r = $mPrograma->getByKeywordPro($strquery);
         echo json_encode($r);
     }
+    public function buscarPrograma1() {
+        $strquery = @$_REQUEST["keyword"];
+        $mPrograma = new ProgramaModel();
+        $r = $mPrograma->getByKeywordPro1($strquery);
+        echo json_encode($r);
+    }
     
     public function insert() {
         $entity = new Programa();

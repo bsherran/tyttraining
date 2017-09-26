@@ -21,7 +21,7 @@ $config = Config::singleton();
                         <div class="panel panel-primary tabla">
                             <div class="panel-heading">Agregar Super Administrador</div>
                             <div class="panel-body">
-                                <form action="?c=Area&a=insert" method="POST" enctype="multipart/form-data" id="frmGuardar" class="col-md-8">
+                                <form action="?c=Admin&a=registrarSupAdmin" method="POST" enctype="multipart/form-data" id="frmGuardar" class="col-md-8">
                                     <br/> 
                                     <div>
                                         <img src="<?php echo $config->get("assets") ?>perfil.jpg" id="foto" class="avatar img-registro">
